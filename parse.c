@@ -4,7 +4,7 @@ char *_strdup(char *str)
 {
     char *ar;
     unsigned int i, size;
-
+    num_tokens = 0;
     if (str == NULL)
         return (NULL);
     for (size = 0; *(str + size) != '\0'; size++)
@@ -28,7 +28,7 @@ char **parse(char *oldline) {
     char *line;
 
     line = _strdup(oldline);
-    num_tokens = 0;
+
     while (line[i])
     {
         if (line[i] == ' ' || line[i] == '\n' || line[i] == '\t')

@@ -18,17 +18,18 @@ int main(int ac, char **av, char *envp[])
 	{
 		printf("($) ");
 	        getline(&line, &bufsize, stdin);
+		printf("%s", line);
 		tokens = parse(line);
-		if (_strcmp(tokens[0], "exit") == 0)
-			break;
-		execute(tokens);
-		i = 0;
 		printf("Number Of Tokens: %d\n", num_tokens);
 		while (i < num_tokens)
 		{
 			printf("%s\n", tokens[i]);
 			i++;
 		}
+		if (_strcmp(tokens[0], "exit") == 0)
+			break;
+		execute(tokens);
+		i = 0;
 	}
 	i = 0;
 	while (i < num_tokens)
