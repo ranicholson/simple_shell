@@ -27,7 +27,7 @@ void execute(char **tokens)
 	}
 	else
 	{
-		while (wait(&status) != child)
+		while (waitpid(-1, &status, 0) != child)
 			;
 	}
 }
