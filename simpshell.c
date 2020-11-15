@@ -2,8 +2,6 @@
 
 int main(int ac, char **av, char *envp[])
 {
-	int i = 0;
-	char *line = NULL;
 	size_t bufsize = 0;
 	char **tokens;
 
@@ -17,27 +15,12 @@ int main(int ac, char **av, char *envp[])
 	while (shell_interaction)
 	{
 		printf("($) ");
+		num_tokens = 0;
 	        getline(&line, &bufsize, stdin);
-		printf("%s", line);
-		tokens = parse(line);
-		printf("Number Of Tokens: %d\n", num_tokens);
-		while (i < num_tokens)
-		{
-			printf("%s\n", tokens[i]);
-			i++;
-		}
+		tokens = parse();
 		if (_strcmp(tokens[0], "exit") == 0)
 			break;
 		execute(tokens);
-		i = 0;
 	}
-	i = 0;
-	while (i < num_tokens)
-	{
-		free(tokens[i]);
-		i++;
-	}
-	free(tokens);
-	free(line);
-		return (0);
+	return (0);
 }

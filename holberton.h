@@ -17,6 +17,8 @@
 
 int num_tokens;
 
+char *line;
+
 int shell_terminal;
 int shell_interaction;
 
@@ -24,7 +26,7 @@ char *_strdup(char *str);
 
 int _strcmp(char *s1, char *s2);
 
-char **parse(char *line);
+char **parse();
 
 int launch_process(char **argv, char *envp[]);
 

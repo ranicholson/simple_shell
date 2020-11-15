@@ -1,37 +1,14 @@
 #include "holberton.h"
 
-char *_strdup(char *str)
-{
-    char *ar;
-    unsigned int i, size;
-    num_tokens = 0;
-    if (str == NULL)
-        return (NULL);
-    for (size = 0; *(str + size) != '\0'; size++)
-        ;
-    ar = malloc((size + 1) * sizeof(char));
-    if (ar == NULL)
-        return (NULL);
-    for (i = 0; str[i] != '\0'; i++)
-    {
-        ar[i] = str[i];
-    }
-    ar[i] = '\0';
-    return (ar);
-}
-
-char **parse(char *oldline) {
+char **parse() {
 
 	int i = 0, check = 1;
     char *p;
     char **array;
-    char *line;
 
-    line = _strdup(oldline);
-
-    while (line[i])
+    while (line[i] != '\0')
     {
-        if (line[i] == ' ' || line[i] == '\n' || line[i] == '\t')
+        if (line[i] == ' ' || line[i] == 10 || line[i] == '\t')
             check = 1;
         else if (check == 1)
         {
@@ -44,11 +21,11 @@ char **parse(char *oldline) {
 
     array = malloc(sizeof(char *) * (num_tokens + 1));
 
-    p = strtok (line, " ");
+    p = strtok (line, " \t\r\n\f\v");
     while (p != NULL)
     {
         array[i++] = p;
-        p = strtok (NULL, " ");
+        p = strtok (NULL, " \t\r\n\f\v");
     }
     array[i] = NULL;
     return (array);
