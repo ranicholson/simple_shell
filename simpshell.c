@@ -21,6 +21,7 @@ int main(int ac, char **av, char *envp[])
 		if (_strcmp(tokens[0], "exit") == 0)
 			break;
 		execute(tokens);
+		free(line);
 	}
 	return (0);
 }

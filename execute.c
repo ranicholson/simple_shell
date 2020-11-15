@@ -35,7 +35,8 @@ void execute(char **tokens)
 		i++;
 	}
 	ar[i] = NULL;
-
+	free(tokens);
+	free(line);
 	child = fork();
 
 	if (child == 0)
@@ -50,4 +51,9 @@ void execute(char **tokens)
 		while (waitpid(-1, &status, 0) != child)
 			;
 	}
+	for (i = 0; i < (num_tokens + 1); i++)
+	{
+		free(ar[i]);
+	}
+	free(ar);
 }
