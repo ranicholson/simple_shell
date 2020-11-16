@@ -1,23 +1,5 @@
 #include "holberton.h"
-char *_strdup(char *str)
-{
-    char *ar;
-    unsigned int i, size;
 
-    if (str == NULL)
-        return (NULL);
-    for (size = 0; *(str + size) != '\0'; size++)
-        ;
-    ar = malloc((size + 1) * sizeof(char));
-    if (ar == NULL)
-        return (NULL);
-    for (i = 0; str[i] != '\0'; i++)
-    {
-        ar[i] = str[i];
-    }
-    ar[i] = '\0';
-    return (ar);
-}
 void execute(char **tokens)
 {
 	int i = 0, status;
@@ -35,8 +17,12 @@ void execute(char **tokens)
 		i++;
 	}
 	ar[i] = NULL;
+	for (i = 0; i < num_tokens; i++)
+	{
+		printf("%p\n", tokens[i]);
+	}
+        free(tokens[0]);
 	free(tokens);
-	free(line);
 	child = fork();
 
 	if (child == 0)

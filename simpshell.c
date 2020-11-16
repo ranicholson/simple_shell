@@ -16,12 +16,13 @@ int main(int ac, char **av, char *envp[])
 	{
 		printf("($) ");
 		num_tokens = 0;
+		line = NULL;
 	        getline(&line, &bufsize, stdin);
 		tokens = parse();
+		free(line);
 		if (_strcmp(tokens[0], "exit") == 0)
 			break;
 		execute(tokens);
-		free(line);
 	}
 	return (0);
 }
