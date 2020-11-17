@@ -19,27 +19,15 @@ char *_strdup(char *str)
     return (ar);
 }
 
-char **parse() {
-
-	int i = 0, check = 1;
+char **parse(char *line, int num_tokens)
+{
+	int i = 0;
 	char *p;
-	char *newline;
-	char **array;
+	char *newline = NULL;
+	char **array = NULL;
+	char **ar = NULL;
 
-	while (line[i] != '\0')
-	{
-		if (line[i] == ' ' || line[i] == 10 || line[i] == '\t')
-			check = 1;
-		else if (check == 1)
-		{
-			check = 0;
-			++num_tokens;
-		}
-		i++;
-	}
-	i = 0;
-
-	array = malloc(sizeof(char *) * (num_tokens + 1));
+	array = malloc(sizeof(char *) * num_tokens);
 	newline = _strdup(line);
 	p = strtok (newline, " \t\r\n\f\v");
 	while (p != NULL)
@@ -47,7 +35,17 @@ char **parse() {
 		array[i++] = p;
 		p = strtok (NULL, " \t\r\n\f\v");
 	}
-	array[i] = NULL;
+	printf("Tokens before tokens alloc: %d", num_tokens);
+	ar = malloc(sizeof(char *) * (num_tokens + 1));
 
-	return (array);
+	for (i = 0; i < num_tokens; i++)
+	{
+		ar[i] = _strdup(array[i]);
+		printf("After strdup ar[%d] = %s\\0\n", i, ar[i]);
+	}
+	ar[i] = NULL;
+        free(newline);
+	free(line);
+	free(array);
+	return (ar);
 }

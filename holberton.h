@@ -15,10 +15,6 @@
 #include <sys/wait.h>
 #include <string.h>
 
-int num_tokens;
-
-char *line;
-
 int shell_terminal;
 int shell_interaction;
 
@@ -26,10 +22,10 @@ char *_strdup(char *str);
 
 int _strcmp(char *s1, char *s2);
 
-char **parse();
+char **parse(char *line, int num_tokens);
 
 int launch_process(char **argv, char *envp[]);
 
-void execute(char **tokens);
+void execute(char **tokens, int num_tokens);
 
 #endif /* HOLBERTON_H */
