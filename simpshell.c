@@ -3,7 +3,6 @@
 int main(int ac, char **av, char *envp[])
 {
 	size_t bufsize = 0;
-	char **tokens = NULL;
 	char *line = NULL;
 	int i, check = 1;
 	int num_tokens;
@@ -36,14 +35,14 @@ int main(int ac, char **av, char *envp[])
 				++num_tokens;
 			}
 		}
-		tokens = parse(line, num_tokens);
+		parse(line, num_tokens);
 		line = NULL;
-		if (_strcmp(tokens[0], "exit") == 0)
-			exit(98);
-		execute(tokens, num_tokens);
+/*		if (_strcmp(tokens[0], "exit") == 0)
+		exit(98); */
+/*		execute(tokens, num_tokens);
 		for (i = 0; i <= num_tokens; i++)
 			free(tokens[i]);
-		free(tokens);
+			free(tokens); */
 	}
 	return (0);
 }

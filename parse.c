@@ -19,7 +19,7 @@ char *_strdup(char *str)
     return (ar);
 }
 
-char **parse(char *line, int num_tokens)
+void parse(char *line, int num_tokens)
 {
 	int i = 0;
 	char *p;
@@ -44,8 +44,21 @@ char **parse(char *line, int num_tokens)
 		printf("After strdup ar[%d] = %s\\0\n", i, ar[i]);
 	}
 	ar[i] = NULL;
+	if (_strcmp(ar[0], "exit") == 0)
+	{
+		for (i = num_tokens; i >= 0; i--)
+			free(ar[i]);
+		free(ar);
+		free(newline);
+		free(line);
+		free(array);
+		exit(98);
+	}
+	execute(ar, num_tokens);
+	for (i = num_tokens; i >= 0; i--)
+		free(ar[i]);
+	free(ar);
         free(newline);
 	free(line);
 	free(array);
-	return (ar);
 }

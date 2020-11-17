@@ -22,7 +22,7 @@ char *_strdup(char *str);
 
 int _strcmp(char *s1, char *s2);
 
-char **parse(char *line, int num_tokens);
+void parse(char *line, int num_tokens);
 
 int launch_process(char **argv, char *envp[]);
 
