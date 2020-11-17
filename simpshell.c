@@ -1,15 +1,11 @@
 #include "holberton.h"
 
-int main(int ac, char **av, char *envp[])
+int main(void)
 {
 	size_t bufsize = 0;
 	char *line = NULL;
 	int i, check = 1;
 	int num_tokens;
-
-	ac = ac;
-	av = av;
-	envp = envp;
 
 	shell_terminal = STDIN_FILENO;
 	shell_interaction = isatty(shell_terminal);
@@ -35,7 +31,8 @@ int main(int ac, char **av, char *envp[])
 				++num_tokens;
 			}
 		}
-		parse(line, num_tokens);
+		if (parse(line, num_tokens) == 1)
+			exit(98);
 		line = NULL;
 /*		if (_strcmp(tokens[0], "exit") == 0)
 		exit(98); */
