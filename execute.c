@@ -12,6 +12,7 @@ void execute(char **tokens)
 		if (execve(tokens[0], tokens, environ) == -1)
 		{
 			perror(tokens[0]);
+			kill(getpid(), SIGKILL);
 		}
 	}
 	else

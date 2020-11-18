@@ -10,12 +10,6 @@ int parse(char *line, int num_tokens)
 	newline = _strdup(line);
 	for (p = strtok (newline, del); p != NULL; p = strtok(NULL, del))
 		array[i++] = p;
-/*	p = strtok (newline, " \t\r\n\f\v");
-	while (p != NULL)
-	{
-		array[i++] = p;
-		p = strtok (NULL, " \t\r\n\f\v");
-		} */
 
 	ar = malloc(sizeof(char *) * (num_tokens + 1));
 

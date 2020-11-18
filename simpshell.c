@@ -34,7 +34,7 @@ int main(void)
 		}
 		num_tokens = numcount(line);
 		if (parse(line, num_tokens) == 1)
-			exit(98);
+			break;
 		line = NULL;
 	}
 	return (0);
