@@ -8,7 +8,13 @@ int parse(char *line, int num_tokens)
 
 	array = malloc(sizeof(char *) * num_tokens);
 	newline = _strdup(line);
-	for (p = strtok (newline, del); p != NULL; p = strtok(NULL, del))
+	p = strtok(newline, del);
+	if (p == NULL)
+	{
+		myfree(line, ar, newline, array, num_tokens);
+		return (0);
+	}
+	for (; p != NULL; p = strtok(NULL, del))
 		array[i++] = p;
 
 	ar = malloc(sizeof(char *) * (num_tokens + 1));
