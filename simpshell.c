@@ -4,12 +4,22 @@ int main(void)
 {
 	size_t bufsize = 0;
 	char *line = NULL;
-	int i, check = 1;
-	int num_tokens;
+	int i, num_tokens;
 
 	shell_terminal = STDIN_FILENO;
 	shell_interaction = isatty(shell_terminal);
 
+	if (shell_interaction == 0)
+	{
+		i = getline(&line, &bufsize, stdin);
+	        if (i < 0)
+		{
+			free(line);
+			return (-1);
+		}
+		num_tokens = numcount(line);
+		parse(line, num_tokens);
+	}
 	while (shell_interaction)
 	{
 		printf("($) ");
@@ -21,25 +31,10 @@ int main(void)
 			printf("\n");
 			break;
 		}
-		for (i = 0; line[i]; i++)
-		{
-			if (line[i] == ' ' || line[i] == 10 || line[i] == '\t')
-				check = 1;
-			else if (check == 1)
-			{
-				check = 0;
-				++num_tokens;
-			}
-		}
+		num_tokens = numcount(line);
 		if (parse(line, num_tokens) == 1)
-			exit(98);
+			break;
 		line = NULL;
-/*		if (_strcmp(tokens[0], "exit") == 0)
-		exit(98); */
-/*		execute(tokens, num_tokens);
-		for (i = 0; i <= num_tokens; i++)
-			free(tokens[i]);
-			free(tokens); */
 	}
 	return (0);
 }
