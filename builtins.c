@@ -8,7 +8,7 @@ int checkbltin(char **ar)
 		return (1);
 	if (_strcmp(ar[0], "env") == 0)
 	{
-		while (environ)
+		while (environ[i] != NULL)
 		{
 			printf("%s\n", environ[i]);
 			i++;
