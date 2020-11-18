@@ -15,8 +15,7 @@ int main(void)
 	        if (i < 0)
 		{
 			free(line);
-			printf("getline failed\n");
-			exit(101);
+			return (-1);
 		}
 		num_tokens = numcount(line);
 		parse(line, num_tokens);
