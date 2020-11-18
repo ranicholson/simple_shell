@@ -4,7 +4,7 @@
  * @s1: string 1
  * @s2: string 2
  *
- * Return: an int value less than greater to or equal to 0
+ * Return: 0 on success, -1 on fail
  */
 int _strcmp(char *s1, char *s2)
 {
@@ -44,4 +44,20 @@ char *_strdup(char *str)
     }
     ar[i] = '\0';
     return (ar);
+}
+int numcount(char *line)
+{
+	int num_tokens = 0, i, check = 1;
+
+	for (i = 0; line[i]; i++)
+	{
+		if (line[i] == ' ' || line[i] == 10 || line[i] == '\t')
+			check = 1;
+		else if (check == 1)
+		{
+			check = 0;
+			++num_tokens;
+		}
+	}
+	return (num_tokens);
 }
