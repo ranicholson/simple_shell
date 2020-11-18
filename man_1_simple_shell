@@ -1,0 +1,42 @@
+.TH HSH 1 "2020-11-23" "Linux" "simple shell man page"
+.SH NAME
+.B hsh
+- simple shell command interpreter
+.SH SYNOPSIS
+.b ./hsh
+[
+.I command
+]
+[
+.I options
+]
+.SH DESCRIPTION
+.B hsh
+is a command line interpreter created as a project for Holberton School. Hsh is a simplified version of the standard Linux shell. The program was created and compiled on 
+.I Ubuntu 14.04 LTS
+Using
+.I GCC 4.8.4.
+.SH OPTIONS
+.B ADD OPTIONS WHEN ALL ARE KNOWN
+.SH EXIT STATUS
+.B LIST INFORMATION ON ALL KNOWN FINAL EXIT VALUES
+.SH FILES
+.B execute.c -
+
+.P
+.B free.c -
+
+.P
+.B holberton.h -
+
+.P
+.B parse.c -
+
+.P
+.B simpleshell.c -
+
+.P
+.B strtools.c -
+
+.SH EXAMPLE
+.B INSERT EXAMPLE OF SHELL USING A COMMAND
