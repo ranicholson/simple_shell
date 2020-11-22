@@ -6,15 +6,21 @@ Simple shell is a Holberton project to end a semester of learning C. This shell 
 
 cd - built-in to change directory
 
-   **cd [DIRECTORY]**
+```
+   cd [DIRECTORY]
+```
 
 env - built-in to print the current environment
 
-    **env**
+```
+env
+```
 
 exit - built-in to exit the shell
 
-     **exit**
+```
+exit
+```
 
 ## Installation
 
