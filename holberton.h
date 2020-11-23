@@ -43,7 +43,7 @@ char *_strcat(char *dest, char *src);
 
 int _strcmp(char *s1, char *s2);
 
-int parse(char *line, int num_tokens, char *argv[], int failcount);
+int parse(char *line, int num_tokens, char *argv[], int failcount, int fail);
 
 int exe(char *line, char **ar, char *nln, char **arry, char **argv, int flcnt);
 
@@ -51,7 +51,7 @@ void myfree(char *line, char **ar, char *newline, char **array);
 
 int _strncmp(char *s1, char *s2, int len);
 
-int checkbltin(char *line, char **ar, char *newline, char **array);
+int checkbltin(char *line, char **ar, char *newline, char **array, int fail);
 
 int numcount(char *line);
 

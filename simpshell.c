@@ -1,4 +1,5 @@
 #include "holberton.h"
+
 /**
  * main - entry point of the shell, checks interactivity
  * @argc: arg count
@@ -10,14 +11,13 @@ int main(int argc, char *argv[])
 {
 	size_t bufsize = 0;
 	char *line = NULL;
-	int i, num_tokens = 0, failcount = 1, shell_terminal, shell_interaction;
+	int i, num_tokens = 0, cmdcount = 1, fail = 0, shell_interaction;
 
 	signal(SIGINT, SIG_IGN);
 	/* Check interactivity */
-	shell_terminal = STDIN_FILENO;
-	shell_interaction = isatty(shell_terminal);
-	/* if non-interactive */
-	if (shell_interaction == 0 && argc == 1)
+	shell_interaction = STDIN_FILENO;
+	shell_interaction = isatty(shell_interaction);
+	if (shell_interaction == 0 && argc == 1)/* if non-interactive */
 	{
 		i = getline(&line, &bufsize, stdin); /* grabs input */
 		if (i < 0)
@@ -26,11 +26,11 @@ int main(int argc, char *argv[])
 			return (-1);
 		}
 		num_tokens = numcount(line); /* counts the # of tokens */
-		parse(line, num_tokens, argv, failcount);
+		if (parse(line, num_tokens, argv, cmdcount, fail) == 1)
+			return (127);
 		/* sends line and numtoken to parser */
 	}
-	/* if interactive */
-	while (shell_interaction)
+	while (shell_interaction)/* if interactive */
 	{
 		/* Shell prompt */
 		write(1, "($) ", 4);
@@ -44,7 +44,8 @@ int main(int argc, char *argv[])
 			break;
 		}
 		num_tokens = numcount(line); /* counts tokens */
-		failcount += parse(line, num_tokens, argv, failcount);
+		fail = parse(line, num_tokens, argv, cmdcount, fail);
+		cmdcount++;
 		/* sends line and numtoken to parser - tracks fails*/
 		line = NULL; /* resets line to null */}
 	return (0);

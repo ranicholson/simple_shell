@@ -5,10 +5,11 @@
  * @num_tokens: number of tokens
  * @argv: array of arguments
  * @failcount: number of failed commands that have been entered
+ * @fail: last command fail check
  * Return: return 0 upon sucess
  */
 
-int parse(char *line, int num_tokens, char **argv, int failcount)
+int parse(char *line, int num_tokens, char **argv, int failcount, int fail)
 {
 	int i = 0, bltin, exval = 0;
 	char *p = NULL, *newline = NULL, **array = NULL, **ar = NULL;
@@ -34,7 +35,7 @@ int parse(char *line, int num_tokens, char **argv, int failcount)
 	for (i = 0; i < num_tokens; i++)
 		ar[i] = _strdup(array[i]);
 	ar[i] = NULL; /* null terminates the array */
-	bltin = checkbltin(line, ar, newline, array); /* checks for built-ins */
+	bltin = checkbltin(line, ar, newline, array, fail); /* checks for built-ins */
 	if (bltin == 0) /* if not a built-in passes into exe */
 		exval = exe(line, ar, newline, array, argv, failcount);
 	myfree(line, ar, newline, array);

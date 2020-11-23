@@ -5,26 +5,27 @@
  * @ar: array that can be handled by execve
  * @newline: duplicate of line
  * @array: Tokens to check
+ * @fail: last command fail check
  * Return: Return depends upon if the built-in was found
  */
-int checkbltin(char *line, char **ar, char *newline, char **array)
+int checkbltin(char *line, char **ar, char *newline, char **array, int fail)
 {
 	int i = 0;
-	char *homeval = NULL;
-	char *home = NULL;
+	char *homeval = NULL, *home = NULL;
 
 	if (_strcmp(ar[0], "exit") == 0) /* compares first token to exit */
 	{
 		myfree(line, ar, newline, array);
+		if (fail == 1)
+			_exit(127); /* if last command sent failed */
 		_exit(0); /* exits with status 0 */
 	}
 	if (_strcmp(ar[0], "env") == 0) /* compares first token to env */
 	{
-		while (environ[i] != NULL)
+		for (i = 0; environ[i] != NULL; i++)
 		{
 			_puts(environ[i]); /* prints string of environ */
 			write(1, "\n", 1);
-			i++;
 		}
 		return (2);
 	}
