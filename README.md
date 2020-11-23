@@ -62,7 +62,7 @@ peytonbrsmith
 ($) exit
 ```
 
-## Support 
+## Support
 
 Reach out to [Peyton](https://github.com/peytonbrsmith) or [Allen](https://github.com/ranicholson)
 
