@@ -1,141 +1,146 @@
 #include "holberton.h"
-
 /**
- * _printf - parses input string and calls f_output to choose which function
- * to use for formatting based on specifiers
- * @format: pointer to string containing specifiers
+ * _printf - prints strings with formatted variables
+ * @format: the string to format and print
  *
- * Return: number of characters printed
+ * Return: the number of chars printed
  */
-
 int _printf(const char *format, ...)
 {
-	va_list arg_list;
-	unsigned int i = 0, len = 0;
-	int cc = 0, ret = 0;
+	int i = 0;
+	int chk = 0;
+	int retcount = 0;
+	va_list args;
+	fmt fmtspec[] = {
+		{"%", chkfmt},
+		{"\\", chkfmt},
+		{NULL, NULL}
+	};
 
-	if (!format)
-		return (-1);
+	va_start(args, format);
 
-	va_start(arg_list, format);
-	while (format[len])
-		++len;
-
-	for (i = 0; i < len; ++i)
+	while (format != NULL && format[i] != '\0')
 	{
-		if (format[i] == '%')
+		if (format[i] == *(fmtspec[0].ltr))
 		{
-			++i;
+			chk += fmtspec[0].type(&args, format, i);
+			if (chk == -1)
+				return (-1);
+			retcount += chk;
+			i++;
 			while (format[i] == ' ')
 				i++;
-			if (format[i] == '\0')
-				return (-1);
-			ret = f_output(format[i], &arg_list);
-			if (ret < 0)
-				return (-1);
-			cc += ret;
+			chk = 1;
 		}
-		else
+		if (chk == 0)
 		{
 			_putchar(format[i]);
-			cc++;
+			retcount++;
 		}
+		chk = 0;
+		i++;
 	}
-	va_end(arg_list);
-	return (cc);
+
+	va_end(args);
+	return (retcount);
 }
 
-#include "holberton.h"
-
 /**
- * _putchar - writes a character to stdout
- * @c: character to be printed
+ * chkfmt - checks the format modifer
+ * @args: argument pointer
+ * @format: the string
+ * @i: the location of the modifer
  *
- * Return: 1 on success, -1 on failure
+ * Return: count of anything printed
  */
-
-int _putchar(char c)
+int chkfmt(va_list *args, const char *format, int i)
 {
-	return (write(1, &c, 1));
-}
+	int j = 0, x = 0;
+	fmt fmtmods[] = {
+		{"s", prstr},
+		{"d", prdgt},
+		{"i", prdgt},
+		{NULL, NULL}
+	};
 
-#include "holberton.h"
-
-/**
- * f_output - chooses formatting function based on specifier
- * @f: format specifier
- * @arg_list: list of arguments used to replace format specifiers in string
- *
- * Return: number of characters printed
- */
-
-int f_output(char f, va_list *arg_list)
-{
-	unsigned char c;
-	char *s;
-	int cc = 0, d;
-
-	switch (f)
+	i++;
+	if (format[i] == ' ')
 	{
-	case 'c':
-		c = va_arg(arg_list, int);
-		cc += format_c(c);
-		break;
-	case 's':
-		s = va_arg(arg_list, char *);
-		cc += format_s(s);
-		break;
-	case 'i':
-	case 'd':
-		d = va_arg(arg_list, int);
-		cc += format_di(d);
-		break;
-	default:
-		cc += f_output1(f, arg_list);
-		break;
+		while (format[i] == ' ')
+			i++;
 	}
-	return (cc);
-}
-
-/**
- * f_output1 - chooses formatting function based on specifier
- * @f: format specifier
- * @arg_list: list of arguments used to replace format specifiers in string
- *
- * Return: number of characters printed
- */
-
-int f_output1(char f, va_list *arg_list)
-{
-	int cc = 0;
-	unsigned int u;
-
-	switch (f)
+	if (format[i] == '%')
 	{
-	case 'u':
-		u = va_arg(arg_list, unsigned int);
-		cc += format_u(u);
-		break;
-	default:
-		cc += format_literal(f);
-		break;
+		_putchar('%');
+		return (1);
 	}
-	return (cc);
+	if (format[i] == 'n')
+	{
+		_putchar('\n');
+		return (1);
+	}
+	while (fmtmods[j].type != NULL && *(fmtmods[j].ltr) != format[i])
+	{
+		j++;
+	}
+	if (fmtmods[j].type == NULL)
+	{
+		return (-1);
+	}
+	x = fmtmods[j].type(args);
+	return (x);
 }
 
-  
-#include "holberton.h"
-
 /**
- * format_literal - prints invalid specifier as a literal
- * @f: format specifier to be printed
- *
- * Return: number of characters printed
+ * getdigits - gets digits
+ * @n: int to get digits from
  */
-
-int format_literal(char f)
+void getdigits(int n)
 {
-	_putchar('%');
-	_putchar(f);
-	return (2);
+	if (n > 0)
+		getdigits((n / 10));
+	if (n != 0)
+	{
+		_putchar('0' + (n % 10));
+	}
+}
+/**
+ * prdgt - prints digit passed from _printf
+ * @args: argument pointer
+ *
+ * Return: count of digits and signs printed
+ */
+int prdgt(va_list *args)
+{
+	int rc = 0;
+	int n = va_arg(*args, int);
+	int x = n;
+	int ld = 1;
+
+	if (x < 0)
+		x *= -1;
+
+	while (x > 0)
+	{
+		x /= 10;
+		rc++;
+	}
+	if (n < 0)
+	{
+		_putchar('-');
+		rc++;
+		ld = n % 10;
+		n = n / -10;
+	}
+	else if (n == 0)
+	{
+		_putchar('0');
+		return (rc);
+	}
+	getdigits(n);
+	if (ld < 0)
+	{
+		_putchar('0' - ld);
+	}
+	return (rc);
 }
