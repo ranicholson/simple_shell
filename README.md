@@ -24,7 +24,7 @@ exit
 
 ## Installation
 
-Clone the repo below and compile!
+Simply clone the repo below and compile!
 
 ```
 https://github.com/ranicholson/simple_shell
