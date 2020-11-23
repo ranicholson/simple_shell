@@ -17,26 +17,46 @@ is a command line interpreter created as a project for Holberton School. Hsh is 
 Using
 .I GCC 4.8.4.
 .SH OPTIONS
-.B ADD OPTIONS WHEN ALL ARE KNOWN
-.SH EXIT STATUS
-.B LIST INFORMATION ON ALL KNOWN FINAL EXIT VALUES
+
+.B cd - change directory
+
+.P
+.B env - print evironment
+
+.P
+.B exit - exit the shell
+
 .SH FILES
-.B execute.c -
+
+.B builtins - check to see if command is a built-in 
 
 .P
-.B free.c -
+.B execute - function to handle the execution of new processes
 
 .P
-.B holberton.h -
+.B holberton - header file
 
 .P
-.B parse.c -
+.B _printf - simple function to mimic features of printf
 
 .P
-.B simpleshell.c -
+.B parse - contains function to parse tokens and a function to free memory
 
 .P
-.B strtools.c -
+.B path - functions to handle the PATH
+
+.P
+.B simpleshell - main function to start and use shell
+
+.P
+.B strtools - helper tools
+
+.P
+.B strtools2 - more helper tools
 
 .SH EXAMPLE
-.B INSERT EXAMPLE OF SHELL USING A COMMAND
+peytonbrsmith@penguin:~/simple_shell$ ./hsh
+.P ($)
+.P ($)ls
+.P builtins.c  execute.c  holberton.h  parse.c  path.c  _printf.c  README.md  simpshell.c  strtools2.c  strtools.c
+.P ($)exit
