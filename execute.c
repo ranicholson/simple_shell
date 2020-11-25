@@ -44,7 +44,11 @@ int exe(char *line, char **ar, char *nln, char **arry, char **argv, int flcnt)
 			;
 	}
 	free(statbuf);
-	if (status != 0) /* checks if execve failed or succeeded */
-		return (1);
+	if (status == 0) /* checks if execve failed or succeeded */
+		errno = 0;
+	if (status == 512)
+		errno = 2;
+	if (status == 65280)
+		errno = 127;
 	return (0);
 }

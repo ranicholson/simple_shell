@@ -1,30 +1,54 @@
 #include "holberton.h"
+/**
+ * _strcpy - copies str from src to dest
+ * @src: source string
+ * @dest: destination string
+ * Return: pointer to destination string
+ */
+char *_strcpy(char *dest, char *src)
+{
+	int i;
+	int len = 0;
 
+	while (*(src + len) != '\0')
+	{
+		len++;
+	}
+
+	for (i = 0; i <= len; i++)
+	{
+		*(dest + i) = *(src + i);
+	}
+	return (dest);
+}
 /**
  * executepath - function to access PATH
  * @p: directory in PATH to access
  * @tokens: array of tokens to check
  */
-
 void executepath(char *p, char **tokens)
 {
-	int status;
+	int status, len, len2;
 	pid_t child;
+	char *newp = NULL;
 
-	_strcat(p, "/"); /* concatenates the token onto it dir */
-	_strcat(p, tokens[0]);
+	for (len = 0; *(p + len) != '\0'; len++)
+		;
+	for (len2 = 0; tokens[0][len2] != '\0'; len2++)
+		;
+	newp = malloc(sizeof(char) * (len + len2 + 2));
+	_strcpy(newp, p);
+	_strcat(newp, "/"); /* concatenates the token onto its dir */
+	_strcat(newp, tokens[0]);
+	newp[(len + len2 + 1)] = '\0';
 
 	child = fork(); /* forks a child */
 
 	if (child == 0)
 	{
-		if (access(p, X_OK) == 0) /* checks if we have execute permission */
+		if (access(newp, X_OK) == 0) /* checks if we have execute permission */
 		{
-			if (execve(p, tokens, environ) == -1) /* executes if we do */
-			{
-				kill(getpid(), SIGKILL);
-				/* maybe some error message */
-			}
+			execve(newp, tokens, environ);
 		}
 	}
 	else
@@ -32,6 +56,9 @@ void executepath(char *p, char **tokens)
 		while (waitpid(-1, &status, 0) != child) /* waits for child */
 			;
 	}
+	if (status == 0)
+		errno = 0;
+	free(newp);
 }
 
 /**
