@@ -1,6 +1,8 @@
 # Simple Shell
 
-Simple shell is a Holberton project to end a semester of learning C. This shell can perform basic functions.
+Simple shell is a Holberton project to end a semester of learning C. This shell can perform basic functions. The shell was kept fairly basic as this was the first major project tackled after learning how to code for a few months.
+
+There were quite a few challenges involved with this project. The biggest being that this was our first attempt at creating our own program. There was a fair bit of frustration in trying to get everything working together nicely. Once this got sorted implementing features was much easier than trying to get the program to work initially.
 
 ### Features
 
@@ -64,8 +66,15 @@ peytonbrsmith
 
 ## Support
 
-Reach out to [Peyton](https://github.com/peytonbrsmith) or [Allen](https://github.com/ranicholson)
+#### [Peyton](https://github.com/peytonbrsmith)
+
+##### - Allen Nicholson <a href="https://github.com/ranicholson">Github</a> | <a href="https://www.linkedin.com/in/allen-nicholson/">LinkedIn</a> | <a href="https://twitter.com/allencodes2020">Twitter</a>
+Allen is an amateur software engineer trying to find his way in this strange new world. Everyday he tries to learn a little bit more. Hoping to go pro someday soon.
 
 ## Project Status
+
+There are a few small issues involving spacing that are uncorrected.
+
+The following commands were not implemented: getline, exit status, set/unset env
 
 Currently there are no plans to continue working on the simple shell after completion of the project.
