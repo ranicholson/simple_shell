@@ -1,10 +1,13 @@
 #include "holberton.h"
+
+
 /**
  * _printf - prints strings with formatted variables
  * @format: the string to format and print
  *
  * Return: the number of chars printed
  */
+
 int _printf(const char *format, ...)
 {
 	int i = 0;
@@ -24,12 +27,16 @@ int _printf(const char *format, ...)
 		if (format[i] == *(fmtspec[0].ltr))
 		{
 			chk += fmtspec[0].type(&args, format, i);
+
 			if (chk == -1)
 				return (-1);
+
 			retcount += chk;
 			i++;
+
 			while (format[i] == ' ')
 				i++;
+
 			chk = 1;
 		}
 		if (chk == 0)
@@ -45,6 +52,7 @@ int _printf(const char *format, ...)
 	return (retcount);
 }
 
+
 /**
  * chkfmt - checks the format modifer
  * @args: argument pointer
@@ -53,6 +61,7 @@ int _printf(const char *format, ...)
  *
  * Return: count of anything printed
  */
+
 int chkfmt(va_list *args, const char *format, int i)
 {
 	int j = 0, x = 0;
@@ -69,47 +78,53 @@ int chkfmt(va_list *args, const char *format, int i)
 		while (format[i] == ' ')
 			i++;
 	}
+
 	if (format[i] == '%')
 	{
 		_putchar('%');
 		return (1);
 	}
+
 	if (format[i] == 'n')
 	{
 		_putchar('\n');
 		return (1);
 	}
+
 	while (fmtmods[j].type != NULL && *(fmtmods[j].ltr) != format[i])
-	{
 		j++;
-	}
+
 	if (fmtmods[j].type == NULL)
-	{
 		return (-1);
-	}
+
 	x = fmtmods[j].type(args);
+
 	return (x);
 }
+
 
 /**
  * getdigits - gets digits
  * @n: int to get digits from
  */
+
 void getdigits(int n)
 {
 	if (n > 0)
 		getdigits((n / 10));
+
 	if (n != 0)
-	{
 		_putchar('0' + (n % 10));
-	}
 }
+
+
 /**
  * prdgt - prints digit passed from _printf
  * @args: argument pointer
  *
  * Return: count of digits and signs printed
  */
+
 int prdgt(va_list *args)
 {
 	int rc = 0;
@@ -125,6 +140,7 @@ int prdgt(va_list *args)
 		x /= 10;
 		rc++;
 	}
+
 	if (n < 0)
 	{
 		_putchar('-');
@@ -132,15 +148,16 @@ int prdgt(va_list *args)
 		ld = n % 10;
 		n = n / -10;
 	}
+
 	else if (n == 0)
 	{
 		_putchar('0');
 		return (rc);
 	}
+
 	getdigits(n);
 	if (ld < 0)
-	{
 		_putchar('0' - ld);
-	}
+
 	return (rc);
 }

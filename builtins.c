@@ -1,4 +1,6 @@
 #include "holberton.h"
+
+
 /**
  * checkbltin - checks if the command entered is a built-in
  * @line: input entered by user
@@ -7,6 +9,7 @@
  * @array: Tokens to check
  * Return: Return depends upon if the built-in was found
  */
+
 int checkbltin(char *line, char **ar, char *newline, char **array)
 {
 	int i = 0;
@@ -16,6 +19,7 @@ int checkbltin(char *line, char **ar, char *newline, char **array)
 		myfree(line, ar, newline, array);
 		_exit(errno); /* exits with status 0 or errno */
 	}
+
 	if (_strcmp(ar[0], "env") == 0) /* compares first token to env */
 	{
 		for (i = 0; environ[i] != NULL; i++)
@@ -25,16 +29,22 @@ int checkbltin(char *line, char **ar, char *newline, char **array)
 		}
 		return (2);
 	}
+
 	if (_strcmp(ar[0], "cd") == 0) /* compares first token to exit */
 	{
 		changedir(ar);
-		return (2); /* go back to shell loop */	}
+		return (2); /* go back to shell loop */
+	}
+
 	return (0);
 }
+
+
 /**
  * changedir - changes directory to ar
  * @ar: the directory to change to or nothing
  */
+
 void changedir(char **ar)
 {
 	int i = 0;

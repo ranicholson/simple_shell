@@ -1,4 +1,6 @@
 #include "holberton.h"
+
+
 /**
  * _strcmp - compares two strings
  * @s1: string 1
@@ -6,6 +8,7 @@
  *
  * Return: 0 on success, -1 on fail
  */
+
 int _strcmp(char *s1, char *s2)
 {
 	while (*s1 || *s2)
@@ -15,11 +18,13 @@ int _strcmp(char *s1, char *s2)
 			s1++;
 			s2++;
 		}
+
 		else
 			return (-1);
 	}
 	return (0);
 }
+
 
 /**
  * _strncmp - function to compare strings
@@ -38,11 +43,14 @@ int _strncmp(char *s1, char *s2, int len)
 			s1++;
 			s2++;
 		}
+
 		else
 			return (-1);
 	}
 	return (0);
 }
+
+
 /**
  * _strcat - concatenates two strings
  * @dest: the destination string
@@ -58,27 +66,25 @@ char *_strcat(char *dest, char *src)
 	int len2 = 0;
 
 	while (*(src + len1) != '\0')
-	{
 		len1++;
-	}
 
 	while (*(dest + len2) != '\0')
-	{
 		len2++;
-	}
 
 	for (i = 0; i <= len1; i++)
-	{
 		*(dest + (len2 + i)) = *(src + i);
-	}
+
 	return (dest);
 }
+
+
 /**
  * _strdup - duplicates one string into another
  * @str: the string to be duplicated
  *
  * Return: a pointer to a duplicate of the string
  */
+
 char *_strdup(char *str)
 {
 	char *ar;
@@ -86,18 +92,23 @@ char *_strdup(char *str)
 
 	if (str == NULL)
 		return (NULL);
+
 	for (size = 0; *(str + size) != '\0'; size++)
 		;
+
 	ar = malloc((size + 1) * sizeof(char));
+
 	if (ar == NULL)
 		return (NULL);
+
 	for (i = 0; str[i] != '\0'; i++)
-	{
 		ar[i] = str[i];
-	}
+
 	ar[i] = '\0';
+
 	return (ar);
 }
+
 
 /**
  * numcount - function to count number of tokens that will be created
@@ -113,11 +124,13 @@ int numcount(char *line)
 	{
 		if (line[i] == ' ' || line[i] == 10 || line[i] == '\t')
 			check = 1;
+
 		else if (check == 1)
 		{
 			check = 0;
 			++num_tokens;
 		}
 	}
+
 	return (num_tokens);
 }
